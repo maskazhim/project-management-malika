@@ -9,9 +9,15 @@ const post = async (action: string, payload: any = {}) => {
         const response = await fetch(API_URL, {
             method: 'POST',
             body: JSON.stringify({ action, payload }),
-            // mode: 'no-cors' // Use this ONLY if you don't care about the response. For reading data, we need cors enabled in GAS.
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            mode: 'no-cors'
             // Note: GAS "Anyone" access usually handles CORS redirects automatically.
         });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
         return await response.json();
     } catch (error) {
         console.error("API Error:", error);

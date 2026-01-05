@@ -74,6 +74,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 
   const login = (email: string) => {
       const user = state.team.find(m => m.email.toLowerCase() === email.toLowerCase());
+      console.log(state.team);
       if (user) {
           setState(prev => ({ ...prev, currentUser: user }));
           return true;
